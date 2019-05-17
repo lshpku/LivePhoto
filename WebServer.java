@@ -2,8 +2,6 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 import java.util.concurrent.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.*;
 
 public class WebServer {
@@ -118,9 +116,7 @@ class ClientHandler implements Runnable {
     * getTextFile - Get the content of the specified text file.
      */
     private String getTextFile(String fileName) {
-        if (!fileName.equals("/"))
-            return null;
-        File file = new File("src/index.txt");
+        File file = new File(fileName);
         Long fileLength = file.length();
         byte[] fileContent = new byte[fileLength.intValue()];
         try {
@@ -131,9 +127,7 @@ class ClientHandler implements Runnable {
         } catch (IOException e) {
         }
         try {
-            String content = new String(fileContent, "GBK");
-            content = content.replaceAll("\\{\\?allphoto\\}", new Date().toString());
-            return content;
+            return new String(fileContent, "utf-8");
         } catch (UnsupportedEncodingException e) {
             return null;
         }
