@@ -5,9 +5,8 @@
 import java.io.*;
 import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Date;
-import java.util.HashMap;
 
 
 /**
@@ -61,7 +60,9 @@ public class ImageDemo {
             ps = conn.prepareStatement(sql);
             ps.setString(1, name);
             rs = ps.executeQuery();
-            account_id = rs.getInt("id");
+            while(rs.next()) {
+                account_id = rs.getInt("id");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -76,6 +77,28 @@ public class ImageDemo {
         }
         return account_id;
     }
+    public static void createAccount(String name){
+        Connection conn = null;
+        PreparedStatement ps = null;
+        try{
+            conn = DBUtil.getConn();
+            String sql = "insert into account (name) values(?)";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, name);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeConn(conn);
+            if (null != ps) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
     public static void deleteTheme(int news_id){
         Connection conn = null;
         PreparedStatement ps = null;
@@ -84,7 +107,7 @@ public class ImageDemo {
             String sql = "delete from news where id =?";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, news_id);
-            ps.executeQuery();
+            ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -120,13 +143,18 @@ public class ImageDemo {
         int news_id = -1;
         int account_id = getAccountId(account);
         try{
-            String sql = "insert into news (title, intro, account_id, time)values(?, ?, ?, ?)";
-            ps = conn.prepareStatement(sql);
+            conn = DBUtil.getConn();
+            String sql = "insert into news(title,intro,account_id,news_time) values" + "(?,?,?,?)";
+            ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, theme);
             ps.setString(2, description);
             ps.setInt(3, account_id);
             ps.setTimestamp(4, timestamp);
-            news_id = ps.executeUpdate(sql, ps.RETURN_GENERATED_KEYS);
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                news_id = rs.getInt(1);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -150,11 +178,15 @@ public class ImageDemo {
         int account_id = getAccountId(account_name);
         int news_id = Integer.parseInt(content.substring(news_idx + "num=".length(), description_idx));
         String description = content.substring(description_idx + "word=".length(), photo_idx);
-        byte[] photos = content.substring(photo_idx + "photo=".length(), content.length()).getBytes();
+        byte[] photos = null;
+        try{
+            photos = content.substring(photo_idx + "photo=".length(), content.length()).getBytes("ISO-8859-1");
+        }catch (java.io.UnsupportedEncodingException e){
+            e.printStackTrace();
+        }
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        int photo_id = -1;
         try {
             conn = DBUtil.getConn();
             String sql = "insert into photo (photo, intro, news_id) values(?,?,?)";
@@ -165,7 +197,7 @@ public class ImageDemo {
             ps.setBytes(1, photos);
             ps.setString(2, description);
             ps.setInt(3, news_id);
-            photo_id = ps.executeUpdate(sql, ps.RETURN_GENERATED_KEYS);
+            ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -222,6 +254,7 @@ public class ImageDemo {
 //        }
 
     }
+
     public static byte[] getPhoto(int photo_id){
         Connection conn = null;
         PreparedStatement ps = null;
@@ -233,7 +266,9 @@ public class ImageDemo {
             ps = conn.prepareStatement(sql);
             ps.setInt(1, photo_id);
             rs = ps.executeQuery();
-            photos = rs.getBytes("photo");
+            while(rs.next()){
+                photos = rs.getBytes("photo");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -248,7 +283,7 @@ public class ImageDemo {
         }
         return photos;
     }
-    public static News getNews(int news_id){
+    public static News getNews(int news_id) {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -259,21 +294,21 @@ public class ImageDemo {
             ps = conn.prepareStatement(sql);
             ps.setInt(1, news_id);
             rs = ps.executeQuery();
-            String title = rs.getString("title");
-            String intro = rs.getString("intro");
-
+            String title = null;
+            String intro = null;
+            if (rs.next()){
+                title = rs.getString("title");
+                intro = rs.getString("intro");
+            }
             News n = new News(title, intro);
             ArrayList<Photo> p = new ArrayList<>();
             sql = "select * from photo where news_id =?";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, news_id);
             rs = ps.executeQuery();
-            String p_intro = rs.getString("intro");
-            byte[] p_content = rs.getBytes("photo");
-            p.add(new Photo(p_intro, p_content));
             while (rs.next()) {
-                p_intro = rs.getString("intro");
-                p_content = rs.getBytes("photo");
+                String p_intro = rs.getString("intro");
+                byte[] p_content = rs.getBytes("photo");
                 p.add(new Photo(p_intro, p_content));
             }
             Photo[] _p = new Photo[p.size()];
@@ -303,13 +338,12 @@ public class ImageDemo {
         News[] res = null;
         try{
             conn = DBUtil.getConn();
-            String sql = "select top ? * from news order by time";
+            String sql = "select * from news order by news_time desc limit ?";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, k);
             rs = ps.executeQuery();
-            int id = rs.getInt("id");
+
             ArrayList<News> n = new ArrayList<>();
-            n.add(getNews(id));
             while(rs.next()){
                 n.add(getNews(rs.getInt("id")));
             }
@@ -343,8 +377,8 @@ public class ImageDemo {
             conn = DBUtil.getConn();
             String sql = "insert into photo (id,name,photo)values(?,?,?)";
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, 1);
-            ps.setString(2, "Tom");
+            ps.setInt(1, 2);
+            ps.setString(2, "Sam");
             ps.setBinaryStream(3, in, in.available());
             int count = ps.executeUpdate();
             if (count > 0) {
@@ -368,20 +402,20 @@ public class ImageDemo {
     }
 
     // 读取数据库中图片
-    public static void readDB2Image() {
-        String targetPath = "/Users/wangyanbin/Desktop/test/test1.jpg";
+    public static void readDB2Image(String filepath, String fileName, int news_id) {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
             conn = DBUtil.getConn();
-            String sql = "select * from photo where id =?";
+            String sql = "select * from photo where news_id =?";
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, 1);
+            ps.setInt(1, news_id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                InputStream in = rs.getBinaryStream("photo");
-                ImageUtil.readBin2Image(in, targetPath);
+//                InputStream in = rs.getBinaryStream("photo");
+//                ImageUtil.readBin2Image(in, targetPath);
+                getFile(rs.getBytes("photo"), filepath, fileName);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -404,9 +438,89 @@ public class ImageDemo {
 
         }
     }
+
+    public static byte[] getBytes(String filePath){
+        byte[] buffer = null;
+        try {
+            File file = new File(filePath);
+            FileInputStream fis = new FileInputStream(file);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream(1000);
+            byte[] b = new byte[1000];
+            int n;
+            while ((n = fis.read(b)) != -1) {
+                bos.write(b, 0, n);
+            }
+            fis.close();
+            bos.close();
+            buffer = bos.toByteArray();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return buffer;
+    }
+
+    // ----------------根据byte数组，生成文件  ----------------
+    public static void getFile(byte[] bfile, String filePath,String fileName) {
+        BufferedOutputStream bos = null;
+        FileOutputStream fos = null;
+        File file = null;
+        try {
+            File dir = new File(filePath);
+            if(!dir.exists()&&dir.isDirectory()){//判断文件目录是否存在
+                dir.mkdirs();
+            }
+            file = new File(filePath+"/"+fileName);
+            fos = new FileOutputStream(file);
+            bos = new BufferedOutputStream(fos);
+            bos.write(bfile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (bos != null) {
+                try {
+                    bos.close();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
+    }
+
     //测试
     public static void main(String[] args) {
-//        readImage2DB();
-//        readDB2Image();
+//        createAccount("tonywyb");
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        String time = df.format(new Date());
+//        String content = "theme=" + "UNK" + "description=" + "This is a UNK news." + "account=" + "tonywyb" + "time=" + time;
+//        establishTheme(content);
+//        deleteTheme(2);
+
+        //============================//
+//        String photo = null;
+//        byte[] byte_1 = getBytes("/Users/wangyanbin/Desktop/1.jpg");
+//        try{
+//            photo = new String(byte_1,"ISO-8859-1");}
+//        catch(java.io.UnsupportedEncodingException e){
+//            e.printStackTrace();
+//        }
+//        String content = "account=" + "test" + "num=" + "6" + "word=" + "This is a UNK description for photo" + "photo=" + photo;
+//        sendInfo(content);
+//        readDB2Image("/Users/wangyanbin/Desktop/test", "tmp.jpg", 6);
+        //============================//
+
+//        getFile(getPhoto(7), "/Users/wangyanbin/Desktop/test", "tmp2.jpg");
+        //============================//
+//        News n = getNews(6);
+        //============================//
+//        News[] n = getRecentNews(5);
     }
 }

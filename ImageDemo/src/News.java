@@ -9,13 +9,6 @@ class News {
         this.title = title;
         this.intro = intro;
     }
-
-    public News(String title, String intro, Photo[] photos){
-        this.title = title;
-        this.intro = intro;
-        this.photos = photos;
-    }
-
     public void setPhoto(Photo[] photots){
         this.photos = photots;
     }
