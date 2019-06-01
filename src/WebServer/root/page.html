@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>{?title} - umi图片直播</title>
+    <link rel="StyleSheet" href="/style.css" type="text/css">
+    <link rel="Icon" href="/logo_128.png" type="image/png">
+    <script type="text/javascript" src="/jquery.js"></script>
+    <script>
+        $(function() {
+            $(".poseimg").click(function() {
+                var _this = $(this);
+                imgShow("#outerdiv", "#innerdiv", "#bigimg", _this);
+            });
+        });
+
+        function imgShow(outerdiv, innerdiv, bigimg, _this) {
+            var src = _this.attr("src");
+            $(bigimg).attr("src", src);
+            $("<img/>").attr("src", src).on('load', function() {
+                var winWidth = $(window).width();
+                var winHeight = $(window).height();
+                var imgWidth = this.width;
+                var imgHeight = this.height;
+                var scale = 0.98;
+
+                var zoomHeight = winHeight * scale / imgHeight;
+                var zoomWidth = winWidth * scale / imgWidth;
+                var zoom = zoomWidth < zoomHeight ? zoomWidth : zoomHeight;
+                if (zoom < 1) {
+                    imgHeight = imgHeight * zoom;
+                    imgWidth = imgWidth * zoom;
+                }
+                $(bigimg).css("width", imgWidth);
+
+                var top = (winHeight - imgHeight) / 2;
+                var left = (winWidth - imgWidth) / 2;
+                $(innerdiv).css({
+                    "top": top,
+                    "left": left
+                });
+                $(outerdiv).fadeIn("fast");
+            });
+            $(outerdiv).click(function() {
+                $(this).fadeOut("fast");
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <div id="top" class="header">
+        <div class="logo">
+            <a href="/"><img width=100% src="/logo_384.png"></a>
+        </div>
+        <div class="title"><a class="quiet" style="color: dimgrey;" href="/">Live Photo</a></div>
+        <a class="info quiet" style="color: dimgrey;" href="/intro.html">
+            <div>i</div>
+        </a>
+    </div>
+
+    <main>
+        <div style="padding-top: 5px;">
+            <div class="intro">
+                <div class="title"><b>{?title}</b></div>
+                <div style="display: flex; flex-wrap: wrap;">
+                    {?meta}
+                </div>
+                <hr color=lightgrey size=1px>
+                <div class="content">{?intro}</div>
+            </div>
+        </div>
+
+        <div class="waterfall">
+            {?photo}
+        </div>
+    </main>
+
+    <div id="outerdiv">
+        <div id="innerdiv">
+            <img id="bigimg" style="border:0px solid #fff;" src="" />
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="content"><a class="quiet" style="color:#666;">© 2019 umi图片直播 - Java程序设计 - 第10组</a></div>
+    </div>
+
+</body>
+
+</html>
