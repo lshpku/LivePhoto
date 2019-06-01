@@ -1,17 +1,10 @@
-/**
- *
- */
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * @author Administrator
- *
- */
+
 class ImageUtil {
 
     // 读取本地图片获取输入流

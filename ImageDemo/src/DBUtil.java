@@ -1,15 +1,7 @@
-/**
- *
- */
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- * @author Administrator
- *
- */
 class DBUtil {
     // 定义数据库连接参数
     public static final String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
@@ -43,9 +35,5 @@ class DBUtil {
             }
         }
     }
-//    //测试
-//    public static void main(String[] args) throws SQLException {
-//        System.out.println(DBUtil.getConn());
-//    }
 
 }

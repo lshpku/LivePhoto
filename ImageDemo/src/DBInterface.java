@@ -1,7 +1,3 @@
-/**
- *
- */
-
 import java.io.*;
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -9,10 +5,35 @@ import java.util.*;
 import java.util.Date;
 
 
-/**
- * @author Administrator 测试写入数据库以及从数据库中读取
- */
-public class ImageDemo {
+public class DBInterface {
+    public static int getAccountId(String name){
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int account_id = -1;
+        try{
+            conn = DBUtil.getConn();
+            String sql = "select * from account where name =?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, name);
+            rs = ps.executeQuery();
+            while(rs.next()) {
+                account_id = rs.getInt("id");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeConn(conn);
+            if (null != ps) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return account_id;
+    }
     public static HashMap<String, ArrayList<Object>> getAccountContent(String name){
         int account_id = getAccountId(name);
         Connection conn = null;
@@ -48,56 +69,6 @@ public class ImageDemo {
             }
         }
         return res;
-    }
-    public static int getAccountId(String name){
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        int account_id = -1;
-        try{
-            conn = DBUtil.getConn();
-            String sql = "select * from account where name =?";
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, name);
-            rs = ps.executeQuery();
-            while(rs.next()) {
-                account_id = rs.getInt("id");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            DBUtil.closeConn(conn);
-            if (null != ps) {
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return account_id;
-    }
-    public static void createAccount(String name){
-        Connection conn = null;
-        PreparedStatement ps = null;
-        try{
-            conn = DBUtil.getConn();
-            String sql = "insert into account (name) values(?)";
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, name);
-            ps.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            DBUtil.closeConn(conn);
-            if (null != ps) {
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
     }
     public static void deleteTheme(int news_id){
         Connection conn = null;
@@ -191,9 +162,6 @@ public class ImageDemo {
             conn = DBUtil.getConn();
             String sql = "insert into photo (photo, intro, news_id) values(?,?,?)";
             ps = conn.prepareStatement(sql);
-//            Blob photos_blob = conn.createBlob();
-//            photos_blob.setBytes(1, photos);
-//            ps.setBlob(1, photos_blob);
             ps.setBytes(1, photos);
             ps.setString(2, description);
             ps.setInt(3, news_id);
@@ -366,26 +334,16 @@ public class ImageDemo {
         return res;
     }
 
-    // 将图片插入数据库
-    public static void readImage2DB() {
-        String path = "/Users/wangyanbin/Desktop/test1.jpg";
+    // 测试函数：建立新账户
+    public static void createAccount(String name){
         Connection conn = null;
         PreparedStatement ps = null;
-        FileInputStream in = null;
-        try {
-            in = ImageUtil.readImage(path);
+        try{
             conn = DBUtil.getConn();
-            String sql = "insert into photo (id,name,photo)values(?,?,?)";
+            String sql = "insert into account (name) values(?)";
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, 2);
-            ps.setString(2, "Sam");
-            ps.setBinaryStream(3, in, in.available());
-            int count = ps.executeUpdate();
-            if (count > 0) {
-                System.out.println("插入成功！");
-            } else {
-                System.out.println("插入失败！");
-            }
+            ps.setString(1, name);
+            ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -398,10 +356,9 @@ public class ImageDemo {
                 }
             }
         }
-
     }
 
-    // 读取数据库中图片
+    // 读取数据库中new_id的图片，写入"filepath/filename"
     public static void readDB2Image(String filepath, String fileName, int news_id) {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -413,8 +370,6 @@ public class ImageDemo {
             ps.setInt(1, news_id);
             rs = ps.executeQuery();
             while (rs.next()) {
-//                InputStream in = rs.getBinaryStream("photo");
-//                ImageUtil.readBin2Image(in, targetPath);
                 getFile(rs.getBytes("photo"), filepath, fileName);
             }
         } catch (Exception e) {
@@ -439,6 +394,7 @@ public class ImageDemo {
         }
     }
 
+    // 图片->byte[]
     public static byte[] getBytes(String filePath){
         byte[] buffer = null;
         try {
@@ -461,8 +417,8 @@ public class ImageDemo {
         return buffer;
     }
 
-    // ----------------根据byte数组，生成文件  ----------------
-    public static void getFile(byte[] bfile, String filePath,String fileName) {
+    // byte[]->图片
+    public static void getFile(byte[] bfile, String filePath, String fileName) {
         BufferedOutputStream bos = null;
         FileOutputStream fos = null;
         File file = null;
@@ -502,7 +458,7 @@ public class ImageDemo {
 //        String time = df.format(new Date());
 //        String content = "theme=" + "UNK" + "description=" + "This is a UNK news." + "account=" + "tonywyb" + "time=" + time;
 //        establishTheme(content);
-//        deleteTheme(2);
+//        deleteTheme(1);
 
         //============================//
 //        String photo = null;

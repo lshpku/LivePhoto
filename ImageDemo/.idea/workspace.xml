@@ -2,18 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="afc67f12-a15e-418a-aab7-b4228416a0db" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/255af3d1-4126-43f8-99f9-59c5674e7a62.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ImageDemo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ImageDemo.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ImageDemo/DBUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ImageDemo/DBUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ImageDemo/ImageDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ImageDemo/ImageDemo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ImageDemo/News.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ImageDemo/News.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ImageDemo/ImageDemo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ImageDemo/ImageUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ImageDemo/ImageUtil.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ImageDemo/Photo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ImageDemo/Photo.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ImageDemo/account.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ImageDemo/account.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DBUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DBUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ImageDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ImageDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/News.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/News.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ImageDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DBInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ImageUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ImageUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Photo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Photo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/account.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -44,11 +45,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ImageUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="21" column="18" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
+            <state relative-caret-position="225">
+              <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
+                <element signature="method#readBin2Image#0;class#ImageUtil#0" />
               </folding>
             </state>
           </provider>
@@ -57,10 +58,9 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DBUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="98">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
+            <state relative-caret-position="345">
+              <caret line="23" column="68" selection-start-line="23" selection-start-column="68" selection-end-line="23" selection-end-column="68" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
@@ -68,22 +68,23 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/ImageDemo.java">
+        <entry file="file://$PROJECT_DIR$/src/DBInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="3" lean-forward="true" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
+            <state relative-caret-position="240">
+              <caret line="360" column="44" selection-start-line="360" selection-start-column="44" selection-end-line="360" selection-end-column="44" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
                 <element signature="method#getAccountId#0;class#ImageDemo#0" />
-                <element signature="method#createAccount#0;class#ImageDemo#0" />
+                <element signature="method#getAccountContent#0;class#ImageDemo#0" />
+                <element signature="e#523#531#0" expanded="true" />
+                <element signature="e#580#588#0" expanded="true" />
                 <element signature="method#deleteTheme#0;class#ImageDemo#0" />
                 <element signature="method#establishTheme#0;class#ImageDemo#0" />
                 <element signature="method#sendInfo#0;class#ImageDemo#0" />
-                <element signature="e#6527#6542#0" />
                 <element signature="method#getPhoto#0;class#ImageDemo#0" />
                 <element signature="method#getNews#0;class#ImageDemo#0" />
-                <element signature="method#readImage2DB#0;class#ImageDemo#0" />
+                <element signature="method#getRecentNews#0;class#ImageDemo#0" />
+                <element signature="method#createAccount#0;class#ImageDemo#0" />
                 <element signature="method#readDB2Image#0;class#ImageDemo#0" />
                 <element signature="method#getBytes#0;class#ImageDemo#0" />
                 <element signature="method#getFile#0;class#ImageDemo#0" />
@@ -95,8 +96,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Photo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="6" selection-start-column="6" selection-end-column="6" />
+            <state relative-caret-position="75">
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
             </state>
           </provider>
         </entry>
@@ -104,8 +105,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/News.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="12" selection-start-column="12" selection-end-column="12" />
+            <state relative-caret-position="165">
+              <caret line="11" column="41" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
+              <folding>
+                <element signature="e#289#290#0" expanded="true" />
+                <element signature="e#326#327#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -113,8 +118,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/account.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            <state relative-caret-position="45">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
@@ -137,6 +142,7 @@
       <find>&quot;insert into photo (photo, intro, news_id) values(?,?,?)&quot;;</find>
       <find>&quot;ISO-8859-1&quot;</find>
       <find>rs.next())</find>
+      <find>readImage2DB</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -147,12 +153,13 @@
       <list>
         <option value="$PROJECT_DIR$/src/JavaDB4mysql.java" />
         <option value="$PROJECT_DIR$/src/JDBC4Mysql.java" />
-        <option value="$PROJECT_DIR$/src/ImageUtil.java" />
-        <option value="$PROJECT_DIR$/src/account.java" />
         <option value="$PROJECT_DIR$/src/News.java" />
-        <option value="$PROJECT_DIR$/src/Photo.java" />
         <option value="$PROJECT_DIR$/src/DBUtil.java" />
         <option value="$PROJECT_DIR$/src/ImageDemo.java" />
+        <option value="$PROJECT_DIR$/src/Photo.java" />
+        <option value="$PROJECT_DIR$/src/account.java" />
+        <option value="$PROJECT_DIR$/src/ImageUtil.java" />
+        <option value="$PROJECT_DIR$/src/DBInterface.java" />
       </list>
     </option>
   </component>
@@ -162,7 +169,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
+  <component name="ProjectFrameBounds" fullScreen="true">
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="805" />
@@ -173,6 +180,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -190,7 +198,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -219,9 +226,16 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="ImageDemo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ImageDemo" />
+  <component name="RunManager" selected="Application.DBInterface">
+    <configuration name="DBInterface" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="DBInterface" />
+      <module name="ImageDemo" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ImageUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ImageUtil" />
       <module name="ImageDemo" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -229,7 +243,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ImageDemo" />
+        <item itemvalue="Application.ImageUtil" />
+        <item itemvalue="Application.DBInterface" />
       </list>
     </recent_temporary>
   </component>
@@ -249,12 +264,13 @@
       <workItem from="1559217392200" duration="2460000" />
       <workItem from="1559228076202" duration="11666000" />
       <workItem from="1559291286644" duration="3465000" />
-      <workItem from="1559296219508" duration="13182000" />
+      <workItem from="1559296219508" duration="13699000" />
+      <workItem from="1559352665251" duration="1001000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35461000" />
+    <option name="totallyTimeSpent" value="36979000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -269,7 +285,7 @@
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27110156" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2746781" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -279,8 +295,8 @@
       <window_info id="Learn" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.35687733" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.44114003" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.35687733" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.25774473" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32961586" />
@@ -297,7 +313,7 @@
       <window_info anchor="right" id="Maven" order="3" weight="0.3297568" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Database" order="6" visible="true" weight="0.15379113" />
+      <window_info anchor="right" id="Database" order="6" visible="true" weight="0.10014306" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
     </layout>
@@ -337,24 +353,6 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/ImageDemo.java</url>
-          <line>169</line>
-          <properties />
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/ImageDemo.java</url>
-          <line>523</line>
-          <properties />
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -463,65 +461,69 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ImageUtil.java">
+    <entry file="file://$PROJECT_DIR$/src/DBUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="21" column="18" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
+        <state relative-caret-position="345">
+          <caret line="23" column="68" selection-start-line="23" selection-start-column="68" selection-end-line="23" selection-end-column="68" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DBUtil.java">
+    <entry file="file://$PROJECT_DIR$/src/ImageUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        <state relative-caret-position="225">
+          <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
+            <element signature="method#readBin2Image#0;class#ImageUtil#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/News.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="41" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
+          <folding>
+            <element signature="e#289#290#0" expanded="true" />
+            <element signature="e#326#327#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/account.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/News.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="12" selection-start-column="12" selection-end-column="12" />
+        <state relative-caret-position="45">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Photo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="6" selection-start-column="6" selection-end-column="6" />
+        <state relative-caret-position="75">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ImageDemo.java">
+    <entry file="file://$PROJECT_DIR$/src/DBInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="3" lean-forward="true" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
+        <state relative-caret-position="240">
+          <caret line="360" column="44" selection-start-line="360" selection-start-column="44" selection-end-line="360" selection-end-column="44" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
             <element signature="method#getAccountId#0;class#ImageDemo#0" />
-            <element signature="method#createAccount#0;class#ImageDemo#0" />
+            <element signature="method#getAccountContent#0;class#ImageDemo#0" />
+            <element signature="e#523#531#0" expanded="true" />
+            <element signature="e#580#588#0" expanded="true" />
             <element signature="method#deleteTheme#0;class#ImageDemo#0" />
             <element signature="method#establishTheme#0;class#ImageDemo#0" />
             <element signature="method#sendInfo#0;class#ImageDemo#0" />
-            <element signature="e#6527#6542#0" />
             <element signature="method#getPhoto#0;class#ImageDemo#0" />
             <element signature="method#getNews#0;class#ImageDemo#0" />
-            <element signature="method#readImage2DB#0;class#ImageDemo#0" />
+            <element signature="method#getRecentNews#0;class#ImageDemo#0" />
+            <element signature="method#createAccount#0;class#ImageDemo#0" />
             <element signature="method#readDB2Image#0;class#ImageDemo#0" />
             <element signature="method#getBytes#0;class#ImageDemo#0" />
             <element signature="method#getFile#0;class#ImageDemo#0" />
