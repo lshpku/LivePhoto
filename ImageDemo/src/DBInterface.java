@@ -178,49 +178,6 @@ public class DBInterface {
                 }
             }
         }
-
-//        try {
-//            conn = DBUtil.getConn();
-//            String sql = "select * from news where account_id=?";
-//            ps = conn.prepareStatement(sql);
-//            ps.setInt(1, account_id);
-//            rs = ps.executeQuery();
-//            byte[] photo_ids = rs.getBytes("photos");
-//            ByteArrayInputStream arrayInputStream = new ByteArrayInputStream(photo_ids);
-//            ObjectInputStream inputStream = new ObjectInputStream(arrayInputStream);
-//            ArrayList<Integer> photo_lis = (ArrayList<Integer>)inputStream.readObject();
-//            inputStream.close();
-//            arrayInputStream.close();
-//            photo_lis.add(photo_id);
-//
-//            ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-//            ObjectOutputStream objectOutputStream = new ObjectOutputStream(arrayOutputStream);
-//            objectOutputStream.writeObject(photo_lis);
-//            objectOutputStream.flush();
-//            photo_ids = arrayOutputStream.toByteArray();
-//            objectOutputStream.close();
-//            arrayOutputStream.close();
-//
-//            sql = "update news set photos=? where account_id=?";
-//            ps = conn.prepareStatement(sql);
-//            ps.setBytes(1, photo_ids);
-//            ps.setInt(2, account_id);
-//            ps.executeUpdate();
-//
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            DBUtil.closeConn(conn);
-//            if (null != ps) {
-//                try {
-//                    ps.close();
-//                } catch (SQLException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-
     }
 
     public static byte[] getPhoto(int photo_id){
