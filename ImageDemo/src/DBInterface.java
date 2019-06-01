@@ -315,7 +315,7 @@ public class DBInterface {
         }
     }
 
-    // 读取数据库中new_id的图片，写入"filepath/filename"
+    // 测试函数：读取数据库中new_id的图片，写入"filepath/filename"
     public static void readDB2Image(String filepath, String fileName, int news_id) {
         Connection conn = null;
         PreparedStatement ps = null;
