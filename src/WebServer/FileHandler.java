@@ -28,7 +28,7 @@ public class FileHandler {
     private final static Pattern NEWS_SPLIT = Pattern.compile(
             "^/([0-9]{1,8})/?$");
     private final static Pattern PHOTO_SPLIT = Pattern.compile(
-            "^/([0-9]{1,8})/([0-9]{1,8}\\.\\w+)/?$");
+            "^/([0-9]{1,8})/([0-9]{1,8})(\\.\\w+)/?$");
     private final static Pattern SUFFIX_SPLIT = Pattern.compile(
             "\\.(\\w+)/?$");
     private final static String ROOT_DIR;
