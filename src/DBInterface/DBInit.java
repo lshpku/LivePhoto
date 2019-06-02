@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class init {
+public class DBInit {
 
     public static void main(String[] args) {
         for(int i = 0; i < 5; ++i){
