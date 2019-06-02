@@ -9,9 +9,14 @@ import java.io.*;
 import java.net.*;
 import java.util.concurrent.*;
 
-public class WebServer {
+public class WebServer extends Thread {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
+        new WebServer().start();
+    }
+
+    public void run() {
+        System.out.println("WebServer start...");
         ThreadPoolExecutor threadPool = new ThreadPoolExecutor(
                 8, 24, 200, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
         try {
@@ -22,6 +27,7 @@ public class WebServer {
                 threadPool.execute(handler); // serve the client
             }
         } catch (IOException e) {
+            System.out.println("WebServer error...");
         }
     }
 }

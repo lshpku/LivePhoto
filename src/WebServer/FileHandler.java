@@ -9,6 +9,7 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.TreeSet;
 import java.util.regex.*;
+import DBInterface.*;
 
 /**
  * FileHandler - Parse file path and load file.
@@ -35,6 +36,7 @@ public class FileHandler {
         "jpg", "jpeg", "png", "gif", "bmp", "ico"
     };
     private final static TreeSet<String> PHOTOS; // valid photo formats
+    private final static int MAX_NEWS = 20;
 
     /* Decide runtime path and load validations */
     static {
@@ -54,7 +56,6 @@ public class FileHandler {
     /* Parse the path and load the file. */
     public FileHandler(String path) {
         status = 200;
-        HTMLProcessor.setCfgPath(ROOT_DIR + "WebServer/demo/newsdemo.cfg");
         parseSuffix(path);
         loadFile(path);
     }
@@ -76,8 +77,10 @@ public class FileHandler {
 
     private void loadFile(String path) {
         if ("/".equals(path)) {
-            if (loadBytes("root", "index.html"))
-                content = HTMLProcessor .processIndex(content);
+            if (loadBytes("root", "index.html") == false)
+                return;
+            content = HTMLProcessor.processIndex(content,
+                    DBInterface.getRecentNews(MAX_NEWS));
             return;
         }
 
@@ -85,7 +88,7 @@ public class FileHandler {
         if (news.find()) {
             if (loadBytes("root", "page.html")) {
                 content = HTMLProcessor.processPage(content,
-                        Integer.parseInt(news.group(1)));
+                        DBInterface.getNews(Integer.parseInt(news.group(1))));
                 if (content == null)
                     status = 404;
             }
@@ -100,7 +103,8 @@ public class FileHandler {
 
         Matcher photo = PHOTO_SPLIT.matcher(path);
         if (photo.find()) {
-            loadBytes("demo", photo.group(2));
+            content = DBInterface.getPhoto(
+                    Integer.parseInt(photo.group(2)));
             return;
         }
 

@@ -18,6 +18,7 @@ class ClientHandler implements Runnable {
 
     public ClientHandler(Socket connSocket) {
         socket = connSocket;
+        System.out.println("Serve client from " + socket.getRemoteSocketAddress() + "...");
     }
 
     /*
