@@ -7,4 +7,4 @@ runb:
 pid:
 	ps -aux | grep java
 init:
-    java -classpath src DBInterface.DBInit
+	java -classpath src DBInterface.DBInit
