@@ -18,6 +18,7 @@
         function imgShow(outerdiv, innerdiv, bigimg, _this) {
             var src = _this.attr("src");
             $(bigimg).attr("src", src);
+            $("#posetext").html(_this.attr("alt"));
             $("<img/>").attr("src", src).on('load', function() {
                 var winWidth = $(window).width();
                 var winHeight = $(window).height();
@@ -33,6 +34,7 @@
                     imgWidth = imgWidth * zoom;
                 }
                 $(bigimg).css("width", imgWidth);
+                $("#innertext").width(winWidth);
 
                 var top = (winHeight - imgHeight) / 2;
                 var left = (winWidth - imgWidth) / 2;
@@ -78,8 +80,9 @@
     </main>
 
     <div id="outerdiv">
-        <div id="innerdiv">
-            <img id="bigimg" style="border:0px solid #fff;" src="" />
+        <div id="innerdiv"><img id="bigimg" src="" /></div>
+        <div id="innertext">
+            <div id="posetext"></div>
         </div>
     </div>
 

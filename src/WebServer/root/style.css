@@ -222,6 +222,21 @@ img {
     position: absolute;
 }
 
+#innertext {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    font-size: 1.21em;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+#posetext {
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-top: 0.3em;
+    padding-bottom: 0.5em;
+}
+
 .footer {
     border-top: 1px lightgrey solid;
     padding-top: 1.5em;
