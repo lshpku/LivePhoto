@@ -170,21 +170,14 @@ public class DBInterface {
         }
         return news_id;
     }
-    public static void sendInfo(String content) {
+    public static void sendInfo(String content, byte[] photos) {
         int account_idx = content.indexOf("account=");
         int news_idx = content.indexOf("num=");
         int description_idx = content.indexOf("word=");
-        int photo_idx = content.indexOf("photo=");
         String account_name = content.substring(account_idx + "account=".length(), news_idx);
-        int account_id = getAccountId(account_name);
         int news_id = Integer.parseInt(content.substring(news_idx + "num=".length(), description_idx));
-        String description = content.substring(description_idx + "word=".length(), photo_idx);
-        byte[] photos = null;
-        try {
-            photos = content.substring(photo_idx + "photo=".length(), content.length()).getBytes("ISO-8859-1");
-        } catch (java.io.UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+        String description = content.substring(description_idx + "word=".length(), content.length());
+
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;

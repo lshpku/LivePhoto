@@ -19,18 +19,12 @@ public class DBInit {
 //            deleteTheme(i);
         }
         for (int i = 1; i < 6; ++i){
-            String photo = null;
             String file_path = "src/DBInterface/ImageDemo/";
-            byte[] byte_1 = DBInterface.getBytes(file_path + i + ".jpg");
-            try{
-                photo = new String(byte_1,"ISO-8859-1");}
-            catch(java.io.UnsupportedEncodingException e){
-                e.printStackTrace();
-            }
+            byte[] photo = DBInterface.getBytes(file_path + i + ".jpg");
             String account = "test" + i;
             String word = "UNK photo for test" + i;
-            String content = "account=" + account + "num=" + i + "word=" + word + "photo=" + photo;
-            DBInterface.sendInfo(content);
+            String content = "account=" + account + "num=" + i + "word=" + word;
+            DBInterface.sendInfo(content, photo);
 //            readDB2Image("src/DBInterface/demoResult", i + ".jpg", i);
         }
 //        getFile(getPhoto(2), "src/DBInterface/demoResult", "test.jpg");
