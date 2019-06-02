@@ -6,3 +6,5 @@ runb:
 	nohup java -classpath src LivePhoto &
 pid:
 	ps -aux | grep java
+init:
+    java -classpath src DBInterface.DBInit
