@@ -7,7 +7,7 @@ import java.util.Date;
 public class DBInit {
 
     public static void main(String[] args) {
-        for(int i = 0; i < 5; ++i){
+        for(int i = 1; i < 6; ++i){
             DBInterface.createAccount("test" + i);
             String theme = "UNK_" + i;
             String description = "UNK news for test" + i;
@@ -18,7 +18,7 @@ public class DBInit {
             DBInterface.establishTheme(content);
 //            deleteTheme(i);
         }
-        for (int i = 0; i < 5; ++i){
+        for (int i = 1; i < 6; ++i){
             String photo = null;
             String file_path = "ImageDemo/";
             byte[] byte_1 = DBInterface.getBytes(file_path + i + ".jpg");
