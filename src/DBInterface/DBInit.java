@@ -20,7 +20,7 @@ public class DBInit {
         }
         for (int i = 1; i < 6; ++i){
             String photo = null;
-            String file_path = "ImageDemo/";
+            String file_path = "src/DBInterface/ImageDemo/";
             byte[] byte_1 = DBInterface.getBytes(file_path + i + ".jpg");
             try{
                 photo = new String(byte_1,"ISO-8859-1");}
@@ -31,9 +31,9 @@ public class DBInit {
             String word = "UNK photo for test" + i;
             String content = "account=" + account + "num=" + i + "word=" + word + "photo=" + photo;
             DBInterface.sendInfo(content);
-//            readDB2Image("demoResult", i + ".jpg", i);
+//            readDB2Image("src/DBInterface/demoResult", i + ".jpg", i);
         }
-//        getFile(getPhoto(2), "demoResult", "test.jpg");
+//        getFile(getPhoto(2), "src/DBInterface/demoResult", "test.jpg");
         News n = DBInterface.getNews(2);
         News[] n_lis = DBInterface.getRecentNews(3);
     }
