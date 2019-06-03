@@ -29,7 +29,7 @@ public class HTMLProcessor {
                     .append(news.id).append("/\">")
                     .append("<div class=\"newsboard\">")
                     .append("<div class=\"newsicon\"><img src=\"/")
-                    .append(news.id).append("/").append(news.photos[0].id).append("\"></div>")
+                    .append(news.id).append("/").append(news.photos[0].id).append(".jpg\"></div>")
                     .append("<div class=\"newsintro\">")
                     .append("<div class=\"title\">").append(news.title).append("</div>")
                     .append("<div style=\"display: flex; flex-wrap: wrap;\">")
@@ -58,7 +58,7 @@ public class HTMLProcessor {
         for (int i = news.photos.length - 1; i >= 0; i--) {
             photoBuf.append("<div class=\"posediv\"><img class=\"poseimg\" src=\"/")
                     .append(news.id).append("/").append(news.photos[i].id)
-                    .append("\"></div>");
+                    .append(".jpg\" alt=\"").append(news.photos[i].intro).append("\" /></div>");
         }
 
         text = text.replaceAll("\\{\\?title\\}", news.title)
