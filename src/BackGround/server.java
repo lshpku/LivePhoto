@@ -16,8 +16,12 @@ import java.util.HashMap;
 import DBInterface.*;
 
 
-public class server {
+public class server extends Thread {
 	public static void main(String[] args) {
+		new server().start();
+	}
+
+	public void run() {
 		ServerSocket s=null;
 		try {
 			s=new ServerSocket(1999);
