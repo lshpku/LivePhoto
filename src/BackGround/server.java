@@ -40,90 +40,53 @@ public class server extends Thread {
 							break;
 					}
 					if(str.length()>0) {
-						if(str.charAt(0)=='A') {//��¼�˻���������Ӧ����������&���
+						if(str.charAt(0)=='A') {
 							str=str.substring(2);//account=""+" key="+""
 							int idx=str.indexOf("key=");
 							int idx1=str.indexOf("name=");
 							String name=str.substring(idx1+5, idx-1);
 							String key=str.substring(idx+4);
 							OutputStream os=s1.getOutputStream();
-							if (!DBInterface.checkPasswd(name, key)){
+							if(!DBInterface.checkPasswd(name,key)) {
 								os.write("false".getBytes());
-							}
-							else{
-								ObjectOutputStream out = new ObjectOutputStream(s1.getOutputStream());
+							}else {
 								String[] news=DBInterface.getAccountContent(name);
+								int arrayLen=0;
 								try {
-									out.writeObject(news);
-									out.close();
-								}catch(NullPointerException e) {
+									arrayLen=Integer.valueOf(news[0]);
+								}catch(NumberFormatException e) {
 									e.printStackTrace();
+								}
+								int i=0;
+								while(i<=arrayLen) {
+									try {
+										os.write(news[i].getBytes());
+									}catch(NullPointerException e) {
+										e.printStackTrace();
+									}
+									i++;
 								}
 							}
-//						String f="~/root/LivePhoto/src/BackGround/account.txt";
-//						BufferedReader r=new BufferedReader(new InputStreamReader(new FileInputStream(f)));
-//						String line="";
-//						boolean accountExist=false;
-//						OutputStream os=s1.getOutputStream();
-//						while((line=r.readLine())!=null&&line.length() > 0) {
-//							r.readLine();
-//							int lineidx=line.indexOf("key=");
-//							int nameLen=name.length();int keyLen=key.length()-1;int len1=line.length();
-//							int i=0;
-//							for(i=0;i<nameLen&&i<=lineidx-1;++i) {
-//								if(name.charAt(i)!=line.charAt(i))
-//									break;
-//							}
-//							if(i==nameLen) {
-//								for(i=0;i<keyLen&&i<len1;++i) {
-//									if(key.charAt(i)!=line.charAt(lineidx+4+i))
-//										break;
-//								}
-//							}
-//							if(i==keyLen) {
-//								accountExist=true;
-//								ObjectOutputStream out = new ObjectOutputStream(s1.getOutputStream());
-//								HashMap<String, ArrayList<Object>> news=DBInterface.getAccountContent(name);
-//								try {
-//									out.writeObject(news);
-//									out.close();
-//								}catch(NullPointerException e) {
-//									e.printStackTrace();
-//								}
-//								break;
-//							}
-//						}
-//						if(!accountExist) {
-//							os.write("false".getBytes());
-//						}
-							if(os!=null) {
-								try {
-									os.close();
-								}catch(IOException e) {
-									e.printStackTrace();
-								}
+							try {
+								os.close();
+							}catch(IOException e) {
+								e.printStackTrace();
 							}
 //						r.close();
 						}
-						else if(str.charAt(0)=='N') {//�½��˻��������ݴ洢����������ȥ
+						else if(str.charAt(0)=='N') {
 							int idx=str.indexOf("key=");
 							int idx1=str.indexOf("name=");
 							String name=str.substring(idx1+5, idx-1);
 							String key=str.substring(idx+4);
 							DBInterface.createAccount(name, key);
-//						String f="~/root/LivePhoto/src/BackGround/account.txt";
-//						FileOutputStream fo=new FileOutputStream(new File(f),true);
-//						int idx=str.indexOf("name=");
-//						str+=System.getProperty("line.separator");
-//						fo.write(str.substring(idx+5).getBytes());
-//						fo.close();
 						}
-						else if(str.charAt(0)=='D') {//ɾ���������⣬����Ϣ���͸����ݿ�
+						else if(str.charAt(0)=='D') {
 							String num=str.substring(2);
 							int n=Integer.parseInt(num);
 							DBInterface.deleteTheme(n);
 						}
-						else if(str.charAt(0)=='E') {//�½��������⣬�����ݷ��͸����ݿ�
+						else if(str.charAt(0)=='E') {
 							OutputStream output=s1.getOutputStream();
 							int num=DBInterface.establishTheme(str.substring(2));
 							byte[] tmpArray=String.valueOf(num).getBytes();
