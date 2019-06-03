@@ -20,7 +20,7 @@ public class server {
 	public static void main(String[] args) {
 		ServerSocket s=null;
 		try {
-			s=new ServerSocket(88);
+			s=new ServerSocket(1999);
 		}catch(IOException e) {}
 		while(true) {
 			try {
