@@ -19,7 +19,7 @@ public class DBInterface {
             ps = conn.prepareStatement(sql);
             ps.setString(1, name);
             rs = ps.executeQuery();
-            while (rs.next()) {
+            if (rs.next()) {
                 account_id = rs.getInt("id");
             }
         } catch (SQLException e) {
@@ -71,9 +71,6 @@ public class DBInterface {
         ResultSet rs;
         ArrayList<String> res = new ArrayList<>();
         String[] _res = null;
-//        HashMap<String, ArrayList<Object>> res = new HashMap<String, ArrayList<Object>>();
-//        ArrayList<Object> titles = new ArrayList<Object>();
-//        ArrayList<Object> ids = new ArrayList<Object>();
         try {
             conn = DBUtil.getConn();
             String sql = "select * from news where account_id =?";
@@ -84,15 +81,11 @@ public class DBInterface {
                 String t = rs.getString("title");
                 Integer i = rs.getInt("id");
                 res.add("title=" + t + "id=" + i);
-//                titles.add(t);
-//                ids.add(i);
             }
-//            res.put("id", ids);
-//            res.put("title", titles);
             _res = new String[res.size() + 1];
             _res[0] = String.valueOf(res.size());
             for (int i = 1; i < res.size() + 1; ++i) {
-                _res[i] = (String) res.get(i - 1);
+                _res[i] = (String)res.get(i - 1);
             }
         } catch (SQLException e) {
             e.printStackTrace();
