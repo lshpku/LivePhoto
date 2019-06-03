@@ -92,7 +92,7 @@ public class DBInterface {
             _res = new String[res.size() + 1];
             _res[0] = String.valueOf(res.size());
             for (int i = 1; i < res.size() + 1; ++i) {
-                _res[i] = (String)res.get(i - 1);
+                _res[i] = (String) res.get(i - 1);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -351,7 +351,7 @@ public class DBInterface {
         }
     }
 
-    public static boolean checkPasswd(String name, String passwd){
+    public static boolean checkPasswd(String name, String passwd) {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -362,9 +362,9 @@ public class DBInterface {
             ps = conn.prepareStatement(sql);
             ps.setString(1, name);
             rs = ps.executeQuery();
-            if (rs.next()){
+            if (rs.next()) {
                 String password = rs.getString("passwd");
-                if (passwd.equals(password)){
+                if (passwd.equals(password)) {
                     res = true;
                 }
             }
@@ -476,32 +476,29 @@ public class DBInterface {
         }
     }
 
-    public static void delTables(){
+    private static final String[] REFRESH_STAT = new String[]{
+        "SET FOREIGN_KEY_CHECKS = 0;",
+        "drop table if exists account;",
+        "drop table if exists news;",
+        "drop table if exists photo;",
+        "create table account(id int not null auto_increment primary key, name varchar(50), passwd varchar(50)) engine=InnoDB default charset=utf8 collate=utf8_general_ci;",
+        "create table news(id int not null auto_increment primary key, title varchar(50) comment '标题', intro varchar(1000) comment '新闻介绍', photos LongBlob comment '照片集合', account_id int, news_time datetime, foreign key(account_id) references account(id) on update cascade on delete cascade) engine=InnoDB default charset=utf8 collate=utf8_general_ci;",
+        "create table photo( id int not null auto_increment primary key, photo LongBlob comment '照片', intro varchar(1000) comment '介绍', news_id int, foreign key(news_id) references news(id) on update cascade on delete cascade) engine=InnoDB default charset=utf8 collate=utf8_general_ci;",
+        "SET FOREIGN_KEY_CHECKS = 1;"
+    };
+    public static void refreshTables() {
         Connection conn = null;
-        PreparedStatement ps = null;
+        PreparedStatement ps;
         try {
             conn = DBUtil.getConn();
-            String sql = "drop table if exists ?;drop table if exists ?;drop table if exists ?;";
-            sql += "create table account(id int not null auto_increment primary key, name varchar(50), passwd varchar(50)) engine=InnoDB default charset=utf8 collate=utf8_general_ci;";
-            sql += "create table news(id int not null auto_increment primary key, title varchar(50) comment '标题', intro varchar(1000) comment '新闻介绍', photos LongBlob comment '照片集合', account_id int, news_time datetime, foreign key(account_id) references account(id) on update cascade on delete cascade) engine=InnoDB default charset=utf8 collate=utf8_general_ci;";
-            sql += "create table photo( id int not null auto_increment primary key, photo LongBlob comment '照片', intro varchar(1000) comment '介绍', news_id int, foreign key(news_id) references news(id) on update cascade on delete cascade) engine=InnoDB default charset=utf8 collate=utf8_general_ci;";
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, "account");
-            ps.setString(1, "news");
-            ps.setString(1, "photo");
-            ps.executeUpdate();
+            for (String stat : REFRESH_STAT) {
+                ps = conn.prepareStatement(stat);
+                ps.executeUpdate();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             DBUtil.closeConn(conn);
-            if (null != ps) {
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
-
 }

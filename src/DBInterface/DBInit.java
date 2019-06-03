@@ -1,34 +1,72 @@
 package DBInterface;
 
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
 public class DBInit {
 
+    private static final String FILE_PATH = "src/DBInterface/ImageDemo/";
+    private static final String CFG_NAME = "newsdemo.cfg";
+    private static final String COM_TEXT = "Ye are the light of the world. A city that is set on an hill cannot be hid.";
+
     public static void main(String[] args) {
-        for(int i = 1; i < 6; ++i){
-            DBInterface.createAccount("test" + i, "passwd" + i);
-            String theme = "UNK_" + i;
-            String description = "UNK news for test" + i;
-            String account = "test" + i;
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String time = df.format(new Date());
+        new DBInit().refreshDatabase();
+    }
+
+    public void refreshDatabase() {
+
+        /* Delete existing tables and create new tables */
+        DBInterface.refreshTables();
+        System.out.println("Table refreshed...");
+
+        /* Get all news configurations */
+        String lines[] = getText(FILE_PATH + CFG_NAME).split("\n");
+        System.out.println("Configuration read in...");
+
+        for (int i = 0; i < lines.length; i++) {
+            String account = getItems(lines[i], "account")[0];
+            String theme = getItems(lines[i], "theme")[0];
+            String description = getItems(lines[i], "descr")[0];
+            String photos[] = getItems(lines[i], "photo");
+
+            /* Create corresponding account */
+            DBInterface.createAccount(account, "passwd" + i);
+
+            /* Establish news */
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String time = dateFormat.format(new Date());
             String content = "theme=" + theme + "description=" + description + "account=" + account + "time=" + time;
-            DBInterface.establishTheme(content);
-//            deleteTheme(i);
+            int themeId = DBInterface.establishTheme(content);
+
+            /* Establish bonding photos */
+            for (int j = 0; j < photos.length; j++) {
+                byte[] bytes = DBInterface.getBytes(FILE_PATH + photos[j] + ".jpg");
+                String word = "Test photo " + j + " for theme " + themeId + ". " + COM_TEXT;
+                String info = "account=" + account + "num=" + themeId + "word=" + word;
+                DBInterface.sendInfo(info, bytes);
+            }
+
+            System.out.println("Established news: " + theme);
         }
-        for (int i = 1; i < 6; ++i){
-            String file_path = "src/DBInterface/ImageDemo/";
-            byte[] photo = DBInterface.getBytes(file_path + i + ".jpg");
-            String account = "test" + i;
-            String word = "UNK photo for test" + i;
-            String content = "account=" + account + "num=" + i + "word=" + word;
-            DBInterface.sendInfo(content, photo);
-//            readDB2Image("src/DBInterface/demoResult", i + ".jpg", i);
+    }
+
+    private static String getText(String path) {
+        try {
+            byte[] bytes = DBInterface.getBytes(path);
+            return new String(bytes, "utf-8");
+        } catch (IOException e) {
+            return "";
         }
-//        getFile(getPhoto(2), "src/DBInterface/demoResult", "test.jpg");
-        News n = DBInterface.getNews(2);
-        News[] n_lis = DBInterface.getRecentNews(3);
+    }
+
+    private static String[] getItems(String line, String key) {
+        int keyIdx = line.indexOf("-" + key + "=");
+        if (keyIdx < 0)
+            return new String[]{""};
+        int startIdx = keyIdx + key.length() + 3;
+        int endIdx = line.indexOf('\'', startIdx);
+        String items = line.substring(startIdx, endIdx);
+        return items.split(",");
     }
 }
