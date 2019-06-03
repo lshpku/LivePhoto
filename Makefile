@@ -1,5 +1,5 @@
 all:
-	javac src/WebServer/*.java src/DBInterface/*.java src/LivePhoto.java
+	javac src/WebServer/*.java src/DBInterface/*.java src/LivePhoto.java src/BackGround/*.java
 run:
 	java -classpath src LivePhoto
 runb:
