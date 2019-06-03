@@ -74,7 +74,7 @@ public class ResponseHandler {
         if (contentType != null) {
             textWriter.print("Content-Type: " + contentType + CRLF);
             if (status == 200 && contentType.equals("text/html") == false)
-                textWriter.print("Cache-Control: max-age=31536000" + CRLF);
+                textWriter.print("Cache-Control: max-age=600" + CRLF);
         }
         textWriter.print("Connection: closed" + CRLF);
         textWriter.print(CRLF);
