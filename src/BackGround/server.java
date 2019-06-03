@@ -52,7 +52,7 @@ public class server extends Thread {
 							}
 							else{
 								ObjectOutputStream out = new ObjectOutputStream(s1.getOutputStream());
-								HashMap<String, ArrayList<Object>> news=DBInterface.getAccountContent(name);
+								String[] news=DBInterface.getAccountContent(name);
 								try {
 									out.writeObject(news);
 									out.close();

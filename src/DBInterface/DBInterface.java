@@ -64,14 +64,16 @@ public class DBInterface {
         }
         return account_name;
     }
-    public static HashMap<String, ArrayList<Object>> getAccountContent(String name) {
+    public static String[] getAccountContent(String name) {
         int account_id = getAccountId(name);
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs;
-        HashMap<String, ArrayList<Object>> res = new HashMap<String, ArrayList<Object>>();
-        ArrayList<Object> titles = new ArrayList<Object>();
-        ArrayList<Object> ids = new ArrayList<Object>();
+        ArrayList<String> res = null;
+        String[] _res = null;
+//        HashMap<String, ArrayList<Object>> res = new HashMap<String, ArrayList<Object>>();
+//        ArrayList<Object> titles = new ArrayList<Object>();
+//        ArrayList<Object> ids = new ArrayList<Object>();
         try {
             conn = DBUtil.getConn();
             String sql = "select * from news where account_id =?";
@@ -81,11 +83,17 @@ public class DBInterface {
             while (rs.next()) {
                 String t = rs.getString("title");
                 Integer i = rs.getInt("id");
-                titles.add(t);
-                ids.add(i);
+                res.add("title=" + t + "id=" + i);
+//                titles.add(t);
+//                ids.add(i);
             }
-            res.put("id", ids);
-            res.put("title", titles);
+//            res.put("id", ids);
+//            res.put("title", titles);
+            _res = new String[res.size() + 1];
+            _res[0] = String.valueOf(res.size());
+            for (int i = 1; i < res.size() + 1; ++i) {
+                _res[i] = (String)res.get(i - 1);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -98,7 +106,7 @@ public class DBInterface {
                 }
             }
         }
-        return res;
+        return _res;
     }
     public static void deleteTheme(int news_id) {
         Connection conn = null;
