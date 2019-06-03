@@ -8,7 +8,14 @@ public class DBInit {
 
     private static final String FILE_PATH = "src/DBInterface/ImageDemo/";
     private static final String CFG_NAME = "newsdemo.cfg";
-    private static final String COM_TEXT = "Ye are the light of the world. A city that is set on an hill cannot be hid.";
+    private static final String RAND_TEXT[] = new String[]{
+        "【太5:11】人若因我辱骂你们，逼迫你们，捏造各样坏话毁谤你们，你们就有福了。",
+        "【太5:12】应当欢喜快乐，因为你们在天上的赏赐是大的。在你们以前的先知，人也是这样逼迫他们。",
+        "【太5:13】你们是世上的盐。盐若失了味，怎能叫他再咸呢？以后无用，不过丢在外面，被人践踏了。",
+        "【太5:14】你们是世上的光。城造在山上，是不能隐藏的。",
+        "【太5:15】人点灯，不放在斗底下，是放在灯台上，就照亮一家的人。",
+        "【太5:16】你们的光也当这样照在人前，叫他们看见你们的好行为，便将荣耀归给你们在天上的父。"
+    };
 
     public static void main(String[] args) {
         new DBInit().refreshDatabase();
@@ -42,7 +49,8 @@ public class DBInit {
             /* Establish bonding photos */
             for (int j = 0; j < photos.length; j++) {
                 byte[] bytes = DBInterface.getBytes(FILE_PATH + photos[j] + ".jpg");
-                String word = "Test photo " + j + " for theme " + themeId + ". " + COM_TEXT;
+                String word = "Test photo " + j + " for theme " + themeId + ". "
+                        + RAND_TEXT[(int)(Math.random() * RAND_TEXT.length)];
                 String info = "account=" + account + "num=" + themeId + "word=" + word;
                 DBInterface.sendInfo(info, bytes);
             }
