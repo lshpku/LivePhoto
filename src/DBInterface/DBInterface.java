@@ -482,6 +482,9 @@ public class DBInterface {
         try {
             conn = DBUtil.getConn();
             String sql = "drop table if exists ?;drop table if exists ?;drop table if exists ?;";
+            sql += "create table account(id int not null auto_increment primary key, name varchar(50), passwd varchar(50)) engine=InnoDB default charset=utf8 collate=utf8_general_ci;";
+            sql += "create table news(id int not null auto_increment primary key, title varchar(50) comment '标题', intro varchar(1000) comment '新闻介绍', photos LongBlob comment '照片集合', account_id int, news_time datetime, foreign key(account_id) references account(id) on update cascade on delete cascade) engine=InnoDB default charset=utf8 collate=utf8_general_ci;";
+            sql += "create table photo( id int not null auto_increment primary key, photo LongBlob comment '照片', intro varchar(1000) comment '介绍', news_id int, foreign key(news_id) references news(id) on update cascade on delete cascade) engine=InnoDB default charset=utf8 collate=utf8_general_ci;";
             ps = conn.prepareStatement(sql);
             ps.setString(1, "account");
             ps.setString(1, "news");
