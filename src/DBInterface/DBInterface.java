@@ -476,5 +476,29 @@ public class DBInterface {
         }
     }
 
+    public static void delTables(){
+        Connection conn = null;
+        PreparedStatement ps = null;
+        try {
+            conn = DBUtil.getConn();
+            String sql = "drop table if exists ?;drop table if exists ?;drop table if exists ?;";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, "account");
+            ps.setString(1, "news");
+            ps.setString(1, "photo");
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeConn(conn);
+            if (null != ps) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
 }
