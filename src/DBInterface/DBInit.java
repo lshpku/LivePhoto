@@ -8,7 +8,7 @@ public class DBInit {
 
     public static void main(String[] args) {
         for(int i = 1; i < 6; ++i){
-            DBInterface.createAccount("test" + i);
+            DBInterface.createAccount("test" + i, "passwd" + i);
             String theme = "UNK_" + i;
             String description = "UNK news for test" + i;
             String account = "test" + i;
