@@ -29,6 +29,7 @@ public class server extends Thread {
 			while(true) {
 				try {
 					Socket s1=s.accept();
+					System.out.println("back server receive " + s1.getRemoteSocketAddress());
 					InputStream is=s1.getInputStream();
 					byte[] Array=new byte[1024];
 					String str="";
