@@ -319,15 +319,15 @@ public class DBInterface {
         return res;
     }
 
-    // 测试函数：建立新账户
-    public static void createAccount(String name) {
+    public static void createAccount(String name, String passwd) {
         Connection conn = null;
         PreparedStatement ps = null;
         try {
             conn = DBUtil.getConn();
-            String sql = "insert into account (name) values(?)";
+            String sql = "insert into account (name, passwd) values(?, ?)";
             ps = conn.prepareStatement(sql);
             ps.setString(1, name);
+            ps.setString(2, passwd);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -341,6 +341,38 @@ public class DBInterface {
                 }
             }
         }
+    }
+
+    public static boolean checkPasswd(String name, String passwd){
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        boolean res = false;
+        try {
+            conn = DBUtil.getConn();
+            String sql = "select * from account where name =?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, name);
+            rs = ps.executeQuery();
+            if (rs.next()){
+                String password = rs.getString("passwd");
+                if (passwd.equals(password)){
+                    res = true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeConn(conn);
+            if (null != ps) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return res;
     }
 
     // 测试函数：读取数据库中new_id的图片，写入"filepath/filename"

@@ -227,7 +227,11 @@ img {
     left: 0;
     bottom: 0;
     font-size: 1.21em;
+<<<<<<< HEAD
     background-color: rgba(128, 128, 128, 0.2);
+=======
+    background-color: rgba(255, 255, 255, 0.2);
+>>>>>>> dc4df4870d94ade7d7c781a038c627d03f4f3e83
 }
 
 #posetext {
