@@ -69,7 +69,7 @@ public class DBInterface {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs;
-        ArrayList<String> res = null;
+        ArrayList<String> res = new ArrayList<>();
         String[] _res = null;
 //        HashMap<String, ArrayList<Object>> res = new HashMap<String, ArrayList<Object>>();
 //        ArrayList<Object> titles = new ArrayList<Object>();
@@ -475,4 +475,6 @@ public class DBInterface {
             }
         }
     }
+
+
 }
