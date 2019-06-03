@@ -22,10 +22,13 @@ public class server extends Thread {
 	}
 
 	public void run() {
+		System.out.println("server start...");
 		ServerSocket s=null;
 		try {
 			s=new ServerSocket(1999);
-		}catch(IOException e) {}
+		}catch(IOException e) {
+			System.out.println("server error...");
+		}
 		while(true) {
 			try {
 				Socket s1=s.accept();
