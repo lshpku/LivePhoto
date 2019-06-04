@@ -115,12 +115,11 @@ public class server extends Thread {
 						}
 						else {//�ϴ�ͼƬ���֣������ݷ��͸����ݿ�
 							System.out.printf("start sending photo");
-//							FileOutputStream fout1=new FileOutputStream("src/BackGround/test.jpg");
-//							while((len=is.read(Array))!=-1) {
-//								fout1.write(Array);
-//							}
-//							fout1.close();
-							DBInterface.getFile(Array, "src/BackGround", "test.jpg");
+							FileOutputStream fout1=new FileOutputStream("src/BackGround/test.jpg");
+							while((len=is.read(Array))!=-1) {
+								fout1.write(Array, 0, len);
+							}
+							fout1.close();
 							System.out.println("complete writing photo");
 							FileInputStream fin=new FileInputStream(new File("src/BackGround/test.jpg"));
 							byte[] bytes=new byte[fin.available()];
