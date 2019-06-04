@@ -91,6 +91,7 @@ public class server extends Thread {
 						else if(str.charAt(0)=='D') {
 							String num=str.substring(2);
 							int n=Integer.parseInt(num);
+							System.out.println("del theme id " + n);
 							DBInterface.deleteTheme(n);
 						}
 						else if(str.charAt(0)=='E') {
