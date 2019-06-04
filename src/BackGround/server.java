@@ -111,7 +111,6 @@ public class server extends Thread {
 						}
 						else {//�ϴ�ͼƬ���֣������ݷ��͸����ݿ�
 							System.out.printf("start sending photo");
-							int idx1=str.indexOf("photo=");
 							FileOutputStream fout1=new FileOutputStream("src/BackGround/test.jpg");
 							while((len=is.read(Array))!=-1) {
 								fout1.write(Array);
