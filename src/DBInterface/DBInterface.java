@@ -174,7 +174,7 @@ public class DBInterface {
         return news_id;
     }
     public static void sendInfo(String content, byte[] photos) {
-        System.out.println("send photos");
+        System.out.println("info string" + content);
         int account_idx = content.indexOf("account=");
         int news_idx = content.indexOf("num=");
         int description_idx = content.indexOf("word=");
