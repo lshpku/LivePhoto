@@ -48,7 +48,7 @@ public class server extends Thread {
 							String name=str.substring(idx1+5, idx-1);
 							String key=str.substring(idx+4);
 							OutputStream os=s1.getOutputStream();
-							if(DBInterface.checkPasswd(name,key) == false) {
+							if(!DBInterface.checkPasswd(name,key)) {
 								System.out.println("ACCOUNT NAME " + name);
 								System.out.println("account passwd " + key);
 								System.out.println("enter false");

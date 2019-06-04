@@ -357,8 +357,10 @@ public class DBInterface {
             ps.setString(1, name);
             rs = ps.executeQuery();
             if (rs.next()) {
+                System.out.println("find possible user");
                 String password = rs.getString("passwd");
                 if (passwd.equals(password)) {
+                    System.out.println("user found!");
                     res = true;
                 }
             }
