@@ -112,15 +112,16 @@ public class server extends Thread {
 						else {//�ϴ�ͼƬ���֣������ݷ��͸����ݿ�
 							System.out.printf("start sending photo");
 							int idx1=str.indexOf("photo=");
-							FileOutputStream fout1=new FileOutputStream("~/root/LivePhoto/src/BackGround/test.jpg");
+							FileOutputStream fout1=new FileOutputStream("src/BackGround/test.jpg");
 							while((len=is.read(Array))!=-1) {
 								fout1.write(Array);
 							}
 							fout1.close();
-							FileInputStream fin=new FileInputStream(new File("~/root/LivePhoto/src/BackGround/test.jpg"));
+							System.out.println("complete writing photo");
+							FileInputStream fin=new FileInputStream(new File("src/BackGround/test.jpg"));
 							byte[] bytes=new byte[fin.available()];
 							fin.read(bytes);
-							System.out.println();
+							fin.close();
 							DBInterface.sendInfo(str.substring(2),bytes);
 						}
 					}
