@@ -359,12 +359,12 @@ public class DBInterface {
             ps.setString(1, name);
             rs = ps.executeQuery();
             if (rs.next()) {
-//                System.out.println("find possible user");
+                System.out.println("find possible user");
                 String password = rs.getString("passwd") + '\n';
-//                System.out.println("possible passwd: " + password + "len" + password.length());
-//                System.out.println("expected passwd: " + passwd + "len" + passwd.length());
+                System.out.println("possible passwd: " + password + "len" + password.length());
+                System.out.println("expected passwd: " + passwd + "len" + passwd.length());
                 if (passwd.equals(password)) {
-//                    System.out.println("user found!");
+                    System.out.println("user found!");
                     res = true;
                 }
             }
