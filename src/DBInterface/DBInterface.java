@@ -174,7 +174,6 @@ public class DBInterface {
         return news_id;
     }
     public static void sendInfo(String content, byte[] photos) {
-        System.out.println("info string" + content);
         int account_idx = content.indexOf("account=");
         int news_idx = content.indexOf("num=");
         int description_idx = content.indexOf("word=");
@@ -255,6 +254,9 @@ public class DBInterface {
                 title = rs.getString("title");
                 intro = rs.getString("intro");
                 news_time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(rs.getTimestamp("news_time"));
+            }
+            else{
+                return null;
             }
             News n = new News(news_id, account_name, title, intro, news_time);
             ArrayList<Photo> p = new ArrayList<>();
