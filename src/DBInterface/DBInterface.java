@@ -359,8 +359,8 @@ public class DBInterface {
             if (rs.next()) {
                 System.out.println("find possible user");
                 String password = rs.getString("passwd");
-                System.out.println("possible passwd: " + password);
-                System.out.println("expected passwd: " + passwd);
+                System.out.println("possible passwd: " + password + "len" + password.length());
+                System.out.println("expected passwd: " + passwd + "len" + passwd.length());
                 if (passwd.equals(password)) {
                     System.out.println("user found!");
                     res = true;
