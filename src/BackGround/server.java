@@ -95,6 +95,7 @@ public class server extends Thread {
 						}
 						else if(str.charAt(0)=='E') {
 							OutputStream output=s1.getOutputStream();
+							System.out.println(str.substring(2));
 							int num=DBInterface.establishTheme(str.substring(2));
 							byte[] tmpArray=String.valueOf(num).getBytes();
 							output.write(tmpArray);
