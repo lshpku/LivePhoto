@@ -17,21 +17,24 @@ public class HTMLProcessor {
      * processIndex - Generate index page with recent news.
      */
     public static byte[] processIndex(byte[] content, News[] newsList) {
-        if (content ==  null || newsList ==  null)
+        if (content == null || newsList == null)
             return content;
         String text = bytesToString(content);
         StringBuilder newsBuf = new StringBuilder();
 
         for (News news : newsList) {
+            String photoUrl;
             if (news.photos.length == 0)
-                continue;
+                photoUrl = "blank";
+            else
+                photoUrl = news.id + "/" + news.photos[0].id;
             newsBuf.append("<div class=\"newsblock\">")
                     .append("<div class=\"newsbkg\">")
                     .append("<a class=\"quiet\" style=\"color: black;\" href=\"/")
                     .append(news.id).append("/\">")
                     .append("<div class=\"newsboard\">")
                     .append("<div class=\"newsicon\"><img src=\"/")
-                    .append(news.id).append("/").append(news.photos[0].id).append(".jpg\"></div>")
+                    .append(photoUrl).append(".jpg\"></div>")
                     .append("<div class=\"newsintro\">")
                     .append("<div class=\"title\">").append(news.title).append("</div>")
                     .append("<div style=\"display: flex; flex-wrap: wrap;\">")
