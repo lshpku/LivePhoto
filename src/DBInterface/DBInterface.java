@@ -358,7 +358,7 @@ public class DBInterface {
             rs = ps.executeQuery();
             if (rs.next()) {
                 System.out.println("find possible user");
-                String password = rs.getString("passwd");
+                String password = rs.getString("passwd") + '\n';
                 System.out.println("possible passwd: " + password + "len" + password.length());
                 System.out.println("expected passwd: " + passwd + "len" + passwd.length());
                 if (passwd.equals(password)) {
