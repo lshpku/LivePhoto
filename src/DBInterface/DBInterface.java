@@ -179,7 +179,7 @@ public class DBInterface {
         int news_idx = content.indexOf("num=");
         int description_idx = content.indexOf("word=");
         String account_name = content.substring(account_idx + "account=".length(), news_idx);
-        int news_id = Integer.parseInt(content.substring(news_idx + "num=".length(), description_idx));
+        int news_id = Integer.parseInt(content.substring(news_idx + "num=".length(), description_idx - 1));
         String description = content.substring(description_idx + "word=".length(), content.length());
 
         Connection conn = null;
