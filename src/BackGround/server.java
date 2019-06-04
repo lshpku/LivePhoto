@@ -49,6 +49,8 @@ public class server extends Thread {
 							String key=str.substring(idx+4);
 							OutputStream os=s1.getOutputStream();
 							if(!DBInterface.checkPasswd(name,key)) {
+								System.out.println("ACCOUNT NAME" + name);
+								System.out.println("account passwd" + key);
 								System.out.println("enter false");
 								os.write("false".getBytes());
 							}else {
