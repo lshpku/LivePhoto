@@ -78,7 +78,7 @@ public class DBInterface {
             ps.setInt(1, account_id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                System.out.println("find one title!");
+//                System.out.println("find one title!");
                 String t = rs.getString("title");
                 Integer i = rs.getInt("id");
                 res.add("title=" + t + "id=" + i);
@@ -125,6 +125,7 @@ public class DBInterface {
         }
     }
     public static int establishTheme(String content) {
+        System.out.println(content);
         Connection conn = null;
         PreparedStatement ps = null;
         int theme_idx = content.indexOf("theme=");
@@ -357,12 +358,12 @@ public class DBInterface {
             ps.setString(1, name);
             rs = ps.executeQuery();
             if (rs.next()) {
-                System.out.println("find possible user");
+//                System.out.println("find possible user");
                 String password = rs.getString("passwd") + '\n';
-                System.out.println("possible passwd: " + password + "len" + password.length());
-                System.out.println("expected passwd: " + passwd + "len" + passwd.length());
+//                System.out.println("possible passwd: " + password + "len" + password.length());
+//                System.out.println("expected passwd: " + passwd + "len" + passwd.length());
                 if (passwd.equals(password)) {
-                    System.out.println("user found!");
+//                    System.out.println("user found!");
                     res = true;
                 }
             }

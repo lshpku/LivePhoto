@@ -41,7 +41,7 @@ public class server extends Thread {
 					}
 					if(str.length()>0) {
 						if(str.charAt(0)=='A') {
-							System.out.println("enter A");
+//							System.out.println("enter A");
 							str=str.substring(2);//account=""+" key="+""
 							int idx=str.indexOf("key=");
 							int idx1=str.indexOf("name=");
@@ -49,13 +49,13 @@ public class server extends Thread {
 							String key=str.substring(idx+4);
 							OutputStream os=s1.getOutputStream();
 							if(!DBInterface.checkPasswd(name,key)) {
-								System.out.println("ACCOUNT NAME " + name);
-								System.out.println("account passwd " + key);
-								System.out.println("enter false");
+//								System.out.println("ACCOUNT NAME " + name);
+//								System.out.println("account passwd " + key);
+//								System.out.println("enter false");
 								os.write("false".getBytes());
 							}else {
 								String[] news=DBInterface.getAccountContent(name);
-								System.out.println(news.length);
+//								System.out.println(news.length);
 								int arrayLen=0;
 								try {
 									arrayLen=Integer.valueOf(news[0]);
