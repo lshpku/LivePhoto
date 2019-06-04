@@ -23,6 +23,8 @@ public class HTMLProcessor {
         StringBuilder newsBuf = new StringBuilder();
 
         for (News news : newsList) {
+            if (news.photos.length == 0)
+                continue;
             newsBuf.append("<div class=\"newsblock\">")
                     .append("<div class=\"newsbkg\">")
                     .append("<a class=\"quiet\" style=\"color: black;\" href=\"/")
