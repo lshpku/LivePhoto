@@ -19,7 +19,7 @@ public class DBInterface {
             ps = conn.prepareStatement(sql);
             ps.setString(1, name);
             rs = ps.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 account_id = rs.getInt("id");
             }
         } catch (SQLException e) {
@@ -71,6 +71,9 @@ public class DBInterface {
         ResultSet rs;
         ArrayList<String> res = new ArrayList<>();
         String[] _res = null;
+//        HashMap<String, ArrayList<Object>> res = new HashMap<String, ArrayList<Object>>();
+//        ArrayList<Object> titles = new ArrayList<Object>();
+//        ArrayList<Object> ids = new ArrayList<Object>();
         try {
             conn = DBUtil.getConn();
             String sql = "select * from news where account_id =?";
@@ -78,15 +81,18 @@ public class DBInterface {
             ps.setInt(1, account_id);
             rs = ps.executeQuery();
             while (rs.next()) {
-//                System.out.println("find one title!");
                 String t = rs.getString("title");
                 Integer i = rs.getInt("id");
                 res.add("title=" + t + "id=" + i);
+//                titles.add(t);
+//                ids.add(i);
             }
+//            res.put("id", ids);
+//            res.put("title", titles);
             _res = new String[res.size() + 1];
             _res[0] = String.valueOf(res.size());
             for (int i = 1; i < res.size() + 1; ++i) {
-                _res[i] = (String)res.get(i - 1);
+                _res[i] = (String) res.get(i - 1);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -125,7 +131,6 @@ public class DBInterface {
         }
     }
     public static int establishTheme(String content) {
-        System.out.println(content);
         Connection conn = null;
         PreparedStatement ps = null;
         int theme_idx = content.indexOf("theme=");
@@ -178,7 +183,7 @@ public class DBInterface {
         int news_idx = content.indexOf("num=");
         int description_idx = content.indexOf("word=");
         String account_name = content.substring(account_idx + "account=".length(), news_idx);
-        int news_id = Integer.parseInt(content.substring(news_idx + "num=".length(), description_idx - 1));
+        int news_id = Integer.parseInt(content.substring(news_idx + "num=".length(), description_idx));
         String description = content.substring(description_idx + "word=".length(), content.length());
 
         Connection conn = null;
@@ -254,9 +259,6 @@ public class DBInterface {
                 title = rs.getString("title");
                 intro = rs.getString("intro");
                 news_time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(rs.getTimestamp("news_time"));
-            }
-            else{
-                return null;
             }
             News n = new News(news_id, account_name, title, intro, news_time);
             ArrayList<Photo> p = new ArrayList<>();
@@ -361,12 +363,8 @@ public class DBInterface {
             ps.setString(1, name);
             rs = ps.executeQuery();
             if (rs.next()) {
-                System.out.println("find possible user");
-                String password = rs.getString("passwd") + '\n';
-                System.out.println("possible passwd: " + password + "len" + password.length());
-                System.out.println("expected passwd: " + passwd + "len" + passwd.length());
+                String password = rs.getString("passwd");
                 if (passwd.equals(password)) {
-                    System.out.println("user found!");
                     res = true;
                 }
             }
