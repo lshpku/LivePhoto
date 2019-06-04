@@ -57,16 +57,22 @@ public class server extends Thread {
 								}catch(NumberFormatException e) {
 									e.printStackTrace();
 								}
-								int i=0;
-								while(i<=arrayLen) {
-									try {
-										System.out.println(news[i]);
-										os.write(news[i].getBytes());
-									}catch(NullPointerException e) {
-										e.printStackTrace();
-									}
-									i++;
+								os.write(news[0].getBytes());
+								String news_str = "";
+								for(int i = 1; i < news.length; ++i){
+									news_str += news[i];
 								}
+								os.write(news_str.getBytes());
+//								int i=0;
+//								while(i<=arrayLen) {
+//									try {
+////										System.out.println(news[i]);
+//										os.write(news[i].getBytes());
+//									}catch(NullPointerException e) {
+//										e.printStackTrace();
+//									}
+//									i++;
+//								}
 							}
 							try {
 								os.close();
