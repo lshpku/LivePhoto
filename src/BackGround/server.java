@@ -89,7 +89,8 @@ public class server extends Thread {
 							DBInterface.createAccount(name, key);
 						}
 						else if(str.charAt(0)=='D') {
-							String num=str.substring(2);
+							String num=str.substring(2).trim();
+
 							int n=Integer.parseInt(num);
 							System.out.println("del theme id " + n);
 							DBInterface.deleteTheme(n);
