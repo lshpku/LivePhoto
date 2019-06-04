@@ -51,8 +51,8 @@ public class HTMLProcessor {
      * processPage - Generate news page with corresponding news.
      */
     public static byte[] processPage(byte[] content, News news) {
-        if (content == null)
-            return null;
+        if (content == null || news == null)
+            return content;
         String text = bytesToString(content);
 
         StringBuilder metaBuf = new StringBuilder();
