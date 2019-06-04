@@ -51,7 +51,7 @@ public class DBInit {
                 byte[] bytes = DBInterface.getBytes(FILE_PATH + photos[j] + ".jpg");
                 String word = "Test photo " + j + " for theme " + themeId + ". "
                         + RAND_TEXT[(int)(Math.random() * RAND_TEXT.length)];
-                String info = "account=" + account + "num=" + themeId + "word=" + word;
+                String info = "account=" + account + "num=" + themeId + " word=" + word;
                 DBInterface.sendInfo(info, bytes);
             }
 
