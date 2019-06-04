@@ -78,6 +78,7 @@ public class DBInterface {
             ps.setInt(1, account_id);
             rs = ps.executeQuery();
             while (rs.next()) {
+                System.out.println("find one title!");
                 String t = rs.getString("title");
                 Integer i = rs.getInt("id");
                 res.add("title=" + t + "id=" + i);
